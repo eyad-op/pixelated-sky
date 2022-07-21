@@ -10,9 +10,9 @@ class Cloud {
     (this.image = image),
       (this.locationX = this.setLocationX(80, 140)),
       (this.locationY = this.setLocationY(0, 80)),
-      (this.velocity = this.velocityFun(1, 3)),
-      (this.scale = this.scaleFun(2, 4)),
-      (this.imageSrc = `./images/cloud-${this.setImgSrc(1, 6)}.png`);
+      (this.velocity = this.setVelocity(1, 3)),
+      (this.scale = this.setScale(2, 4)),
+      (this.imageSrc = `./images/cloud-${this.getRndomInteger(1, 6)}.png`);
   }
   getRndomInteger(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -23,17 +23,14 @@ class Cloud {
   setLocationY(min, max) {
     return (this.image.style.top = this.getRndomInteger(min, max));
   }
-  velocityFun(min, max) {
+  setVelocity(min, max) {
     return this.getRndomInteger(min, max);
   }
-  scaleFun(min, max) {
+  setScale(min, max) {
     return (this.image.style.transform = `scale(${this.getRndomInteger(
       min,
       max
     )})`);
-  }
-  setImgSrc(min, max) {
-    return this.getRndomInteger(min, max);
   }
 }
 
@@ -56,8 +53,8 @@ function update() {
     if (cloudRect.left + cloudRect.width <= cloudsRect.left) {
       cloud.locationX = cloud.setLocationX(100, 140);
       cloud.locationY = cloud.setLocationY(0, 80);
-      cloud.scale = cloud.scaleFun(2, 4);
-      cloud.velocity = cloud.velocityFun(1, 3);
+      cloud.scale = cloud.setScale(2, 4);
+      cloud.velocity = cloud.setVelocity(1, 3);
     } else {
       cloud.locationX -= cloud.velocity;
     }
